@@ -2,17 +2,23 @@
 
 TO DO:
 
-bm_connect:
-Direct player to the character selection screen, where they can play an existing character, or create a new one.
+<br>
+<details>
+  <summary>bm_connect:</summary>
+  Direct player to the character selection screen, where they can play an existing character, or create a new one.
+</details>
+<br>
+<details>
+  <summary>bm_identity:</summary>
+  Everything related to a character identity and bankpoket money
+</details>
+<br>
+<details>
+  <summary>bm_inventory:</summary>
+  Character Inventory System
+</details>
+<br>
 
-bm_identity:
-Everything related to a character identity and bankpoket money
+and More
 
-bm_inventory:
-Character Inventory System
-
-bm_*jobs name*:
-Jobs
-
-and more
 
