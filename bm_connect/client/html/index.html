@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Character Selection</title>
 </head>
-<body>
+<body class="hidden">
     <main class="cs">
         <header class="cs_title">
             <h1>Character selection</h1>
@@ -18,7 +18,7 @@
                 <h4 class="cs_bank">bank: <span>500$</span></h4>
                 <h4 class="cs_cash">pocket: <span>50$</span></h4>
                 <h4 class="cs_birth">Date of birth: <span>15-06-2020</span></h4>
-                <button class="cs_play cs_button">Play</button>
+                <button class="cs_play cs_button" onclick="close_CS_UI()">Play</button>
             </div>
             <div class="cs_box empty">
                 <button class="cs_create cs_button">Create</button>
@@ -31,5 +31,7 @@
             </div>
         </section>
     </main>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="char_select.js"></script>
 </body>
 </html>
