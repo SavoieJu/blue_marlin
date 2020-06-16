@@ -8,3 +8,11 @@ function toggle_CS_UI() {
 	// $(".shopInterface-options-character").toggleClass("hidden");
 	$("body").toggleClass("hidden");
 }
+
+function close_CS_UI() {
+	toggle_CS_UI();
+	$.post('http://bm_connect/bm:start', JSON.stringify({
+     		data: "NUICallbackHere"
+	 	})
+	);
+}
