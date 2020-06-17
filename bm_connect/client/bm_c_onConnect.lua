@@ -25,6 +25,10 @@ RegisterNUICallback('bm:start', function(data, cb)
 		DisplayRadar(true)
 	end)
 
+	TriggerEvent('chat:addMessage', {
+		args = { data.char_id }
+	})
+
     cb('ok')
 end)
 
@@ -36,7 +40,6 @@ AddEventHandler('bm:getChars', function(result)
 	local char_2 = resultsLua[2]
 	local char_3 = resultsLua[3]
 	local char_4 = resultsLua[4]
-
 
 	SendNUIMessage({
         type = "character_selection_open",

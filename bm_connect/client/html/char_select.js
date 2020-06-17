@@ -12,11 +12,13 @@ function toggle_CS_UI() {
 	$("body").toggleClass("hidden");
 }
 
-function close_CS_UI() {
+function close_CS_UI(char_id) {
+	let id = char_id
+	console.log(id)
 	toggle_CS_UI();
 	$.post('http://bm_connect/bm:start', JSON.stringify({
-     		data: "NUICallbackHere"
-	 	})
+			char_id: id,
+		})
 	);
 }
 
@@ -32,7 +34,7 @@ function populate_CS_UI(char) {
 			    <h4 class="cs_bank">bank: <span>${char.char_bank}.00$</span></h4>
 			    <h4 class="cs_cash">pocket: <span>${char.char_pocket}.00$</span></h4>
 			    <h4 class="cs_birth">Date of birth: <span>${formatDate(date)}</span></h4>
-			    <button class="cs_play cs_button" onclick="close_CS_UI()">Play</button>
+			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id})">Play</button>
 			</div>
 		`;
 	} else {
