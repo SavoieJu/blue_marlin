@@ -14,7 +14,14 @@ function toggle_CS_UI() {
 
 function close_CS_UI(char_id) {
 	let id = char_id
-	console.log(id)
+	toggle_CS_UI();
+	$.post('http://bm_connect/bm:start', JSON.stringify({
+			char_id: id,
+		})
+	);
+}
+
+function createChar() {
 	toggle_CS_UI();
 	$.post('http://bm_connect/bm:start', JSON.stringify({
 			char_id: id,
