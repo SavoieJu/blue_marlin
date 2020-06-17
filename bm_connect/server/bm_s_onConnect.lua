@@ -22,7 +22,6 @@ function DoesPlayerExist(source, license)
 			  	GetPlayerCharacters(source, result[1].id) 
 		  	else 
 		  		AddPlayerToDB(source, license)
-		  		-- TriggerClientEvent('bm:firstConnect', source)
 		  	end
 		end)
 	end)
@@ -41,8 +40,8 @@ function AddPlayerToDB(source, license)
 	  	end)
 end
 
-function GetPlayerCharacters(source, db_id) 
-	MySQL.Async.fetchAll('SELECT * FROM characters WHERE player_id = @db_id', { ['@db_id'] = db_id }, function(result)
+function GetPlayerCharacters(source, db_id)
+	MySQL.Async.fetchAll('SELECT * FROM characters RIGHT JOIN character_finance ON characters.char_id = character_finance.char_id RIGHT JOIN character_job ON characters.char_id = character_job.char_id RIGHT JOIN jobs ON jobs.job_id = character_job.job_id WHERE player_id = @db_id', { ['@db_id'] = db_id }, function(result)
 	  	if next(result) ~= nil then
 	  		print("Player has character(s).")
 		  	TriggerClientEvent('bm:getChars', source, json.encode(result))

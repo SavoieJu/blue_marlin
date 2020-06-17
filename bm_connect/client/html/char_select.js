@@ -21,26 +21,21 @@ function close_CS_UI() {
 }
 
 function populate_CS_UI(char) {
-	console.log(char)
+	let cs_selection = document.querySelector(".cs_selection");
 	if (char != undefined) {
-		console.log("hi")
-		let cs_selection = document.querySelector(".cs_selection");
-
 		var date = new Date(char.birth_date);
 
 		cs_selection.innerHTML += `
 			<div class="cs_box used">
 			    <h3 class="cs_name">${char.first_name} ${char.last_name}</h3>
-			    <h4 class="cs_job">Job</h4>
-			    <h4 class="cs_bank">bank: <span>0$</span></h4>
-			    <h4 class="cs_cash">pocket: <span>0$</span></h4>
+			    <h4 class="cs_job">${char.job_name}</h4>
+			    <h4 class="cs_bank">bank: <span>${char.char_bank}.00$</span></h4>
+			    <h4 class="cs_cash">pocket: <span>${char.char_pocket}.00$</span></h4>
 			    <h4 class="cs_birth">Date of birth: <span>${formatDate(date)}</span></h4>
 			    <button class="cs_play cs_button" onclick="close_CS_UI()">Play</button>
 			</div>
 		`;
 	} else {
-		let cs_selection = document.querySelector(".cs_selection");
-
 		cs_selection.innerHTML += `
 			<div class="cs_box empty">
 			    <button class="cs_create cs_button" onclick="close_CS_UI()">Create</button>
@@ -50,10 +45,8 @@ function populate_CS_UI(char) {
 }
 
 var formatDate = function(timestamp) {
-
 	var date = new Date(timestamp);
 	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',	'November', 'December'];
-
 	return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 
 };
