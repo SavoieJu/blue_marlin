@@ -8,6 +8,7 @@ version '1.0.0'
 
 client_scripts {
     'client/bm_c_createCharacter.lua',
+    'client/pedModels.lua',
 }
 
 ui_page('client/html/index.html')
