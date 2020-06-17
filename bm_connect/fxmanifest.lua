@@ -3,7 +3,7 @@ fx_version 'bodacious'
 games { 'gta5' }
 
 author 'Pravda'
-description 'Blue Merlin Connect'
+description 'Blue Marlin Connect'
 version '1.0.0'
 
 loadscreen_manual_shutdown 'yes'

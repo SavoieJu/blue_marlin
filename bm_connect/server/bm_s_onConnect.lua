@@ -36,8 +36,8 @@ function AddPlayerToDB(source, license)
 		    	DoesPlayerExist(source, license)
 		    else
 		    	print("Error while adding new player")
-		    end
-	  	end)
+		end
+	end)
 end
 
 function GetPlayerCharacters(source, db_id)
