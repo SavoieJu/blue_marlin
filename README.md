@@ -9,13 +9,23 @@ TO DO:
 </details>
 <br>
 <details>
+  <summary>bm_commands:</summary>
+  Useful commands to help develop.
+</details>
+<br>
+<details>
+  <summary>bm_create_character:</summary>
+  Character creation.
+</details>
+<br>
+<details>
   <summary>bm_identity:</summary>
-  Everything related to a character identity and bankpoket money
+  Everything related to a character identity and bankpoket money.
 </details>
 <br>
 <details>
   <summary>bm_inventory:</summary>
-  Character Inventory System
+  Character Inventory System.
 </details>
 <br>
 
