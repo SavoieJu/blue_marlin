@@ -23,8 +23,8 @@ function close_CS_UI(char_id) {
 
 function createChar() {
 	toggle_CS_UI();
-	$.post('http://bm_connect/bm:start', JSON.stringify({
-			char_id: id,
+	$.post('http://bm_connect/bm:startCC', JSON.stringify({
+			data: "create",
 		})
 	);
 }
@@ -47,7 +47,7 @@ function populate_CS_UI(char) {
 	} else {
 		cs_selection.innerHTML += `
 			<div class="cs_box empty">
-			    <button class="cs_create cs_button" onclick="close_CS_UI()">Create</button>
+			    <button class="cs_create cs_button" onclick="createChar()">Create</button>
 			</div>
 		`;
 	}

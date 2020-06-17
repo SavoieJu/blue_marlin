@@ -32,6 +32,14 @@ RegisterNUICallback('bm:start', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('bm:startCC', function(data, cb)
+	
+	SetNuiFocus(false, false)
+	TriggerEvent('bm:startCharCreate')
+
+    cb('ok')
+end)
+
 RegisterNetEvent('bm:getChars', result)
 AddEventHandler('bm:getChars', function(result)
 
