@@ -34,9 +34,35 @@ function AddCharacterToDB(source, id, fname, lname, modelNum)
 	  	function(insertId)
 		    if insertId ~= 0 then
                 print("Added new character succesfully.")
-                AddOutfitToDB(source, modelNum, id, insertId)
+				AddOutfitToDB(source, modelNum, id, insertId)
+				AddCharFinanceToDB(insertId)
+				AddCharJobToDB(insertId)
 		    else
 		    	print("Error while adding new character")
+		end
+	end)
+end
+
+function AddCharFinanceToDB(char_id)
+	MySQL.Async.insert('INSERT INTO character_finance (char_id) VALUES (@char_id)',
+	  	{ ['@char_id'] = char_id },
+	  	function(insertId)
+            if insertId ~= 0 then
+                print("Added default character finance")
+		    else
+		    	print("Error while adding default character finance")
+		end
+	end)
+end
+
+function AddCharJobToDB(char_id)
+	MySQL.Async.insert('INSERT INTO character_job (char_id) VALUES (@char_id)',
+	  	{ ['@char_id'] = char_id },
+	  	function(insertId)
+            if insertId ~= 0 then
+                print("Added default character job")
+		    else
+		    	print("Error while adding default character job")
 		end
 	end)
 end
