@@ -19,6 +19,11 @@ TO DO:
 </details>
 <br>
 <details>
+  <summary>bm_utility:</summary>
+  Various changes to gameplay (ex: removes crosshair, radar on foot, etc...)
+</details>
+<br>
+<details>
   <summary>bm_identity:</summary>
   Everything related to a character identity and bankpoket money.
 </details>
