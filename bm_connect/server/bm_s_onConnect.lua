@@ -62,14 +62,22 @@ function SetLastCharacter(source, license, char_id)
 	MySQL.ready(function ()
 		MySQL.Async.fetchAll('SELECT * FROM players WHERE license = @license', { ['@license'] = license }, function(result)
 		  	if next(result) ~= nil then
-				MySQL.Async.insert('INSERT INTO last_character (player_id, char_id) VALUES (@player_id, @char_id)',
+				MySQL.Async.execute('UPDATE last_character SET char_id = @char_id WHERE player_id = @player_id',
 					{ ['@player_id'] = result[1].id, ['@char_id'] = char_id },
-					function(insertId)
-					if insertId ~= 0 then
-						print("Added last character succesfully.")
-					else
-						print("Error while adding last character")
-					end
+					function(affectedRows)
+						if affectedRows ~= 0 then
+							print(affectedRows)
+						else
+							MySQL.Async.insert('INSERT INTO last_character (player_id, char_id) VALUES (@player_id, @char_id)',
+								{ ['@player_id'] = result[1].id, ['@char_id'] = char_id },
+								function(insertId)
+								if insertId ~= 0 then
+									print("Added last character succesfully.")
+								else
+									print("Error while adding last character")
+								end
+							end)
+						end
 				end)
 		  	else 
 				print("Error while getting player id")

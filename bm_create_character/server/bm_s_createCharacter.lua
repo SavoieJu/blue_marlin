@@ -37,6 +37,7 @@ function AddCharacterToDB(source, id, fname, lname, modelNum)
 				AddOutfitToDB(source, modelNum, id, insertId)
 				AddCharFinanceToDB(insertId)
 				AddCharJobToDB(insertId)
+				UpdateLastCharacter(id, insertId)
 		    else
 		    	print("Error while adding new character")
 		end
@@ -89,5 +90,25 @@ function AddCharAppToDB(source, outfit_id, char_id)
 		    else
 		    	-- print("Error while adding new character outfit")
 		end
+	end)
+end
+
+function UpdateLastCharacter(player_id, char_id)
+	MySQL.Async.execute('UPDATE last_character SET char_id = @char_id WHERE player_id = @player_id',
+		{ ['@player_id'] =player_id, ['@char_id'] = char_id },
+		function(affectedRows)
+			if affectedRows ~= 0 then
+				print(affectedRows)
+			else
+				MySQL.Async.insert('INSERT INTO last_character (player_id, char_id) VALUES (@player_id, @char_id)',
+					{ ['@player_id'] = player_id, ['@char_id'] = char_id },
+					function(insertId)
+					if insertId ~= 0 then
+						print("Added last character succesfully.")
+					else
+						print("Error while adding last character")
+					end
+				end)
+			end
 	end)
 end
