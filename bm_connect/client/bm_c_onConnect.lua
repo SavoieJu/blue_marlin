@@ -14,7 +14,6 @@ AddEventHandler('onClientGameTypeStart', function()
 end)
 
 RegisterNUICallback('bm:start', function(data, cb)
-    print(tonumber(data.house_id))
     TriggerServerEvent("bm:getPlayerSpawnpoint", GetPlayerServerId(PlayerId()), tonumber(data.house_id), data)
 
     cb('ok')
@@ -53,9 +52,9 @@ AddEventHandler('bm:setPlayerPosition', function(spawnpoints, data)
         end
         SetModelAsNoLongerNeeded(model)
     end
-	
     TriggerEvent('bm:loadToPlayer')
     TriggerServerEvent('bm:setLastChar', GetPlayerServerId(PlayerId()), data.char_id)
+    TriggerEvent('bm:updateCharInfo', data.f_name, data.l_name, data.j_name)
 end)
 
 RegisterNetEvent('bm:loadToPlayer')

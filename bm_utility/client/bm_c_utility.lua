@@ -55,7 +55,7 @@ function Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
 	SetTextScale(scaleX*scale, scaleY*scale)
 	SetTextFont(fontId)
 	SetTextProportional(1)
-	SetTextColour(250, 250, 250, 255)		-- You can change the text color here
+	SetTextColour(250, 250, 250, 255)
 	SetTextDropshadow(1, 1, 1, 1, 255)
 	SetTextEdge(2, 0, 0, 0, 150)
 	SetTextDropShadow()
@@ -67,5 +67,7 @@ function Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
 	DrawText(0.0, 0.0)
 	ClearDrawOrigin()
 end
+
+
 
 exports('Draw3DText', Draw3DText)

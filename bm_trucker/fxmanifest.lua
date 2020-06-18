@@ -3,17 +3,16 @@ fx_version 'bodacious'
 games { 'gta5' }
 
 author 'Pravda'
-description 'Blue Marlin Utility'
+description 'Blue Marlin Trucker Job'
 version '1.0.0'
 
 client_scripts {
-    'client/character_info.lua',
-    'client/bm_c_utility.lua',
+    'client/bm_c_trucker_signup.lua',
 }
 
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
-    'server/bm_s_utility.lua',
+    'server/bm_s_trucker_signup.lua',
 }
 
 

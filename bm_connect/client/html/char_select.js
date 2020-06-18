@@ -12,10 +12,13 @@ function toggle_CS_UI() {
 	$("body").toggleClass("hidden");
 }
 
-function close_CS_UI(char_id, outfitNum, house) {
+function close_CS_UI(char_id, outfitNum, house, fname, lname, jname) {
 	let id = char_id
 	let outfit = outfitNum
 	let house_id = house
+	let first_name = fname
+	let last_name = lname
+	let job_name = jname
 	console.log(outfit);
 
 	toggle_CS_UI();
@@ -26,6 +29,10 @@ function close_CS_UI(char_id, outfitNum, house) {
 			char_id: id,
 			outfit_num: outfit,
 			house_id: house_id,
+			f_name: first_name,
+			l_name: last_name,
+			j_name: job_name,
+
 		})
 	);
 }
@@ -58,7 +65,7 @@ function populate_CS_UI(char) {
 			    <h4 class="cs_bank">bank: <span>${char.char_bank}.00$</span></h4>
 			    <h4 class="cs_cash">pocket: <span>${char.char_pocket}.00$</span></h4>
 			    <h4 class="cs_birth">Date of birth: <span>${formatDate(date)}</span></h4>
-			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id}, ${char.outfit}, ${char.house_id})">Play</button>
+			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id}, ${char.outfit}, ${char.house_id}, '${char.first_name}', '${char.last_name}', '${char.job_name}')">Play</button>
 			</div>
 		`;
 	} else {
