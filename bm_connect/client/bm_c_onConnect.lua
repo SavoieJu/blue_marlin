@@ -14,8 +14,28 @@ AddEventHandler('onClientGameTypeStart', function()
 end)
 
 RegisterNUICallback('bm:start', function(data, cb)
+    print(tonumber(data.house_id))
+    TriggerServerEvent("bm:getPlayerSpawnpoint", GetPlayerServerId(PlayerId()), tonumber(data.house_id), data)
 
-	local modelName = exports.bm_connect:ModelListA()[tonumber(data.outfit_num)]
+    cb('ok')
+end)
+
+RegisterNetEvent('bm:setPlayerPosition', spawnpoints, data)
+AddEventHandler('bm:setPlayerPosition', function(spawnpoints, data)
+
+    if #spawnpoints >= 1 then
+        local roomNumber = math.random(38)
+
+        local coords = json.decode(spawnpoints[roomNumber].spawnpoint_coords)
+
+        local ped = PlayerPedId()
+
+        SetEntityCoords(ped, coords[1], coords[2], coords[3], false, false, false, true)
+    end
+
+
+
+    local modelName = exports.bm_connect:ModelListA()[tonumber(data.outfit_num)]
 
 	local model = GetHashKey(modelName)
     if IsModelInCdimage(model) and IsModelValid(model) then
@@ -36,8 +56,6 @@ RegisterNUICallback('bm:start', function(data, cb)
 	
     TriggerEvent('bm:loadToPlayer')
     TriggerServerEvent('bm:setLastChar', GetPlayerServerId(PlayerId()), data.char_id)
-
-    cb('ok')
 end)
 
 RegisterNetEvent('bm:loadToPlayer')
@@ -63,8 +81,7 @@ end)
 
 RegisterNetEvent('bm:getChars', result)
 AddEventHandler('bm:getChars', function(result)
-
-	local resultsLua = json.decode(result)
+    local resultsLua = json.decode(result)
 	local char_1 = resultsLua[1]
 	local char_2 = resultsLua[2]
 	local char_3 = resultsLua[3]

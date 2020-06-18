@@ -10,6 +10,22 @@ AddEventHandler("bm:setLastChar", function(source, char_id)
 	SetLastCharacter(source, license, char_id)
 end)
 
+RegisterServerEvent("bm:getPlayerSpawnpoint", source, house_id, data)
+AddEventHandler("bm:getPlayerSpawnpoint", function(source, house_id, data)
+	if house_id == 1 then
+		GetPossibleDefaultSpawnpoint(source, house_id, data)
+	else
+		print(house_id)
+	end
+	-- WHEN WE HAVE OTHER HOUSE SYSTEM IN PALCE THIS WILL HAVE ELSE TO DEAL WITH VARIOUS OTHER HOUSE SPAWNPOINTS
+end)
+
+function GetPossibleDefaultSpawnpoint(source, house_id, data)
+	MySQL.Async.fetchAll('SELECT spawnpoint_id, spawnpoint_coords FROM spawnpoints WHERE spawnpoint_name LIKE "%pink_cage_%"', {}, function(result)
+		TriggerClientEvent('bm:setPlayerPosition', source, result, data)
+  end)
+end
+
 function GetPlayerLicense(source)
     local license = ""
     for i = 0, GetNumPlayerIdentifiers(source) - 1 do
@@ -47,7 +63,7 @@ function AddPlayerToDB(source, license)
 end
 
 function GetPlayerCharacters(source, db_id)
-	MySQL.Async.fetchAll('SELECT * FROM characters RIGHT JOIN character_finance ON characters.char_id = character_finance.char_id RIGHT JOIN character_job ON characters.char_id = character_job.char_id RIGHT JOIN jobs ON jobs.job_id = character_job.job_id RIGHT JOIN character_appearance ON characters.char_id = character_appearance.char_id RIGHT JOIN character_outfits ON character_appearance.outfit_id = character_outfits.outfit_id WHERE player_id = @db_id', { ['@db_id'] = db_id }, function(result)
+	MySQL.Async.fetchAll('SELECT * FROM characters RIGHT JOIN character_finance ON characters.char_id = character_finance.char_id RIGHT JOIN character_job ON characters.char_id = character_job.char_id RIGHT JOIN jobs ON jobs.job_id = character_job.job_id RIGHT JOIN character_appearance ON characters.char_id = character_appearance.char_id RIGHT JOIN character_outfits ON character_appearance.outfit_id = character_outfits.outfit_id RIGHT JOIN character_house ON characters.char_id = character_house.char_id WHERE player_id = @db_id', { ['@db_id'] = db_id }, function(result)
 	  	if next(result) ~= nil then
 	  		print("Player has character(s).")
 		  	TriggerClientEvent('bm:getChars', source, json.encode(result))

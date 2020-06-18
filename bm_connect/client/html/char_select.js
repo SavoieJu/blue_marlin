@@ -12,9 +12,10 @@ function toggle_CS_UI() {
 	$("body").toggleClass("hidden");
 }
 
-function close_CS_UI(char_id, outfitNum) {
+function close_CS_UI(char_id, outfitNum, house) {
 	let id = char_id
 	let outfit = outfitNum
+	let house_id = house
 	console.log(outfit);
 
 	toggle_CS_UI();
@@ -24,6 +25,7 @@ function close_CS_UI(char_id, outfitNum) {
 	$.post('http://bm_connect/bm:start', JSON.stringify({
 			char_id: id,
 			outfit_num: outfit,
+			house_id: house_id,
 		})
 	);
 }
@@ -45,9 +47,10 @@ function depopulate_CS_UI() {
 
 function populate_CS_UI(char) {
 	let cs_selection = document.querySelector(".cs_selection");
+	
 	if (char != undefined) {
 		let date = new Date(char.birth_date);
-
+		
 		cs_selection.innerHTML += `
 			<div class="cs_box used">
 			    <h3 class="cs_name">${char.first_name} ${char.last_name}</h3>
@@ -55,7 +58,7 @@ function populate_CS_UI(char) {
 			    <h4 class="cs_bank">bank: <span>${char.char_bank}.00$</span></h4>
 			    <h4 class="cs_cash">pocket: <span>${char.char_pocket}.00$</span></h4>
 			    <h4 class="cs_birth">Date of birth: <span>${formatDate(date)}</span></h4>
-			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id}, ${char.outfit})">Play</button>
+			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id}, ${char.outfit}, ${char.house_id})">Play</button>
 			</div>
 		`;
 	} else {
