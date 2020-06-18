@@ -8,6 +8,7 @@ version '1.0.0'
 
 client_scripts {
     'client/bm_c_trucker_signup.lua',
+    'client/bm_c_trucker_truck.lua',
 }
 
 server_scripts {

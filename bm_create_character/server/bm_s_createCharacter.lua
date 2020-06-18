@@ -39,7 +39,8 @@ function AddCharacterToDB(source, id, fname, lname, modelNum)
 				AddCharJobToDB(insertId)
 				UpdateLastCharacter(id, insertId)
 				AddCharHouse(insertId)
-				TriggerClientEvent('bm:firstTimeCharInfo', fname, lname, "Unemployed", insertId)
+				print(insertId)
+				TriggerClientEvent('bm:firstTimeCharInfo', source, fname, lname, "Unemployed", insertId)
 		    else
 		    	print("Error while adding new character")
 		end
