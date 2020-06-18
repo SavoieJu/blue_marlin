@@ -1,28 +1,50 @@
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        HideHudComponentThisFrame(14)
-        if not IsPedInAnyVehicle(PlayerPedId(), false) then
-            DisplayRadar(false)
-        else
-            DisplayRadar(true)
-        end
+        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+        local ped = PlayerPedId()
+
+        disableCrosshair()
+        enableRadarInCar(ped)
+        disableAirControl(veh)
+        disableVehicleRoll(ped, veh)
     end
 end)
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        local veh = GetVehiclePedIsIn(PlayerPedId(), false)
-        if DoesEntityExist(veh) and not IsEntityDead(veh) then
-            local model = GetEntityModel(veh)
-            if not IsThisModelABoat(model) and not IsThisModelAHeli(model) and not IsThisModelAPlane(model) and IsEntityInAir(veh) then
-                DisableControlAction(0, 59) -- leaning left/right
-                DisableControlAction(0, 60) -- leaning up/down
-            end
+function disableCrosshair()
+    HideHudComponentThisFrame(14)
+end
+
+function enableRadarInCar(ped)
+    
+    if not IsPedInAnyVehicle(ped, false) then
+        DisplayRadar(false)
+    else
+        DisplayRadar(true)
+    end
+end
+
+function disableAirControl(veh)
+    if DoesEntityExist(veh) and not IsEntityDead(veh) then
+        local model = GetEntityModel(veh)
+        if not IsThisModelABoat(model) and not IsThisModelAHeli(model) and not IsThisModelAPlane(model) and not IsThisModelABike(model) and IsEntityInAir(veh) then
+            DisableControlAction(0, 59) -- leaning left/right
+            DisableControlAction(0, 60) -- leaning up/down
         end
     end
-end)
+end
+
+function disableVehicleRoll(ped, veh)
+    local roll = GetEntityRoll(veh)
+    local model = GetEntityModel(veh)
+
+    if GetPedInVehicleSeat(veh, -1) == ped then
+        if (roll > 75.0 or roll < -75.0) and not IsThisModelABike(model) then
+            DisableControlAction(2,59,true)
+            DisableControlAction(2,60,true)
+        end
+    end
+end
 
 function Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
 	local px,py,pz=table.unpack(GetGameplayCamCoords())
