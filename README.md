@@ -24,6 +24,11 @@ TO DO:
 </details>
 <br>
 <details>
+  <summary>bm_car_repair:</summary>
+  Repairs car in garages
+</details>
+<br>
+<details>
   <summary>bm_identity:</summary>
   Everything related to a character identity and bankpoket money.
 </details>
