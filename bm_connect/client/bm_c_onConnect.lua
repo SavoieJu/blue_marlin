@@ -16,9 +16,6 @@ end)
 RegisterNUICallback('bm:start', function(data, cb)
 
 	local modelName = exports.bm_connect:ModelListA()[tonumber(data.outfit_num)]
-	print(data[1])
-	print(data.outfit_num)
-	print(modelName)
 
 	local model = GetHashKey(modelName)
     if IsModelInCdimage(model) and IsModelValid(model) then
@@ -37,7 +34,8 @@ RegisterNUICallback('bm:start', function(data, cb)
         SetModelAsNoLongerNeeded(model)
     end
 	
-	TriggerEvent('bm:loadToPlayer')
+    TriggerEvent('bm:loadToPlayer')
+    TriggerServerEvent('bm:setLastChar', GetPlayerServerId(PlayerId()), data.char_id)
 
     cb('ok')
 end)

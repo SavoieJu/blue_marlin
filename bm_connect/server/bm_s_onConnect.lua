@@ -4,6 +4,12 @@ AddEventHandler("bm:playerConnect", function(source)
 	DoesPlayerExist(source, license)
 end)
 
+RegisterServerEvent("bm:setLastChar", source, char_id)
+AddEventHandler("bm:setLastChar", function(source, char_id)
+    local license = GetPlayerLicense(source)
+	SetLastCharacter(source, license, char_id)
+end)
+
 function GetPlayerLicense(source)
     local license = ""
     for i = 0, GetNumPlayerIdentifiers(source) - 1 do
@@ -49,5 +55,25 @@ function GetPlayerCharacters(source, db_id)
 	  		print("Player has no character.")
 	  		TriggerClientEvent('bm:getChars', source, json.encode(result))
 	  	end
+	end)
+end
+
+function SetLastCharacter(source, license, char_id)
+	MySQL.ready(function ()
+		MySQL.Async.fetchAll('SELECT * FROM players WHERE license = @license', { ['@license'] = license }, function(result)
+		  	if next(result) ~= nil then
+				MySQL.Async.insert('INSERT INTO last_character (player_id, char_id) VALUES (@player_id, @char_id)',
+					{ ['@player_id'] = result[1].id, ['@char_id'] = char_id },
+					function(insertId)
+					if insertId ~= 0 then
+						print("Added last character succesfully.")
+					else
+						print("Error while adding last character")
+					end
+				end)
+		  	else 
+				print("Error while getting player id")
+		  	end
+		end)
 	end)
 end
