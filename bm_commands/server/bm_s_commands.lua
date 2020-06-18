@@ -15,3 +15,21 @@ function AddSpawnpointToDB(coords, name)
 		end
 	end)
 end
+
+RegisterServerEvent("bm:changejob", source, job_id, char_id, job_name)
+AddEventHandler("bm:changejob", function(source, job_id, char_id, job_name)
+    setJobCommand(source, job_id, char_id, job_name)
+end)
+
+function setJobCommand(source, job_id, char_id, job_name)
+	MySQL.Async.execute('UPDATE character_job SET job_id = @job_id WHERE char_id = @char_id',
+		{ ['@job_id'] = job_id, ['@char_id'] = char_id },
+		function(affectedRows)
+			if affectedRows ~= 0 then
+				TriggerClientEvent('bm:updateCharInfoJob', source, job_name)
+				TriggerClientEvent('bm:confirmJobChangeCommand', source)
+			else
+				print(affectedRows)
+			end
+	end)
+end
