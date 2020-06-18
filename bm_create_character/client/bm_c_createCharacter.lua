@@ -32,7 +32,7 @@ RegisterNUICallback('bm:closeCharCreate', function(data, cb)
     
     SetNuiFocus(false, false)
 
-    -- TriggerServerEvent('bm:addCharToDB', GetPlayerServerId(PlayerId()), data.fname, data.lname, exports.bm_create_character:ModelList()[tonumber(data.model)+1])
+    TriggerServerEvent('bm:addCharToDB', GetPlayerServerId(PlayerId()), data.fname, data.lname, tonumber(data.model))
     
     cb('ok')
 end)

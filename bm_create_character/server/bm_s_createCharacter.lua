@@ -1,0 +1,67 @@
+RegisterServerEvent("bm:addCharToDB", source, fname, lname, modelNum)
+AddEventHandler("bm:addCharToDB", function(source, fname, lname, modelNum)
+    local license = GetPlayerLicense(source)
+    print(modelNum)
+	GetPlayerDBID(source, license, fname, lname, modelNum)
+end)
+
+function GetPlayerLicense(source)
+    local license = ""
+    for i = 0, GetNumPlayerIdentifiers(source) - 1 do
+        local id = GetPlayerIdentifier(source, i)
+        if string.find(id, "license") then
+            license = id
+        end
+    end
+    return license
+end
+
+function GetPlayerDBID(source, license, fname, lname, modelNum)
+	MySQL.ready(function ()
+		MySQL.Async.fetchAll('SELECT * FROM players WHERE license = @license', { ['@license'] = license }, function(result)
+		  	if next(result) ~= nil then
+                AddCharacterToDB(source, result[1].id, fname, lname, modelNum) 
+		  	else 
+		  		print('Error while trying to get ID to add new character')
+		  	end
+		end)
+	end)
+end
+
+function AddCharacterToDB(source, id, fname, lname, modelNum)
+	MySQL.Async.insert('INSERT INTO characters (player_id, first_name, last_name, birth_date) VALUES (@player_id, @first_name, @last_name, CURDATE())',
+	  	{ ['@player_id'] = id, ['@first_name'] = fname, ['@last_name'] = lname },
+	  	function(insertId)
+		    if insertId ~= 0 then
+                print("Added new character succesfully.")
+                AddOutfitToDB(source, modelNum, id, insertId)
+		    else
+		    	print("Error while adding new character")
+		end
+	end)
+end
+
+function AddOutfitToDB(source, modelNum, id, char_id)
+	MySQL.Async.insert('INSERT INTO character_outfits (outfit_name, outfit) VALUES (@outfit_name, @modelNum)',
+	  	{ ['@outfit_name'] = "default", ['@modelNum'] = modelNum },
+	  	function(insertId)
+            if insertId ~= 0 then
+                print(insertId)
+                AddCharAppToDB(source, insertId, char_id)
+		    else
+		    	print("Error while adding new outfit")
+		end
+	end)
+end
+
+function AddCharAppToDB(source, outfit_id, char_id)
+	MySQL.Async.insert('INSERT INTO character_appearance (char_id, outfit_id) VALUES (@char_id, @outfit_id)',
+	  	{ ['@char_id'] = char_id, ['@outfit_id'] = outfit_id },
+	  	function(insertId)
+		    if insertId ~= 0 then
+		    	-- print(insertId)
+		    else
+		    	-- print("Error while adding new character outfit")
+		end
+	end)
+end
