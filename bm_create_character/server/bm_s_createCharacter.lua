@@ -38,6 +38,7 @@ function AddCharacterToDB(source, id, fname, lname, modelNum)
 				AddCharFinanceToDB(insertId)
 				AddCharJobToDB(insertId)
 				UpdateLastCharacter(id, insertId)
+				AddCharHouse(insertId)
 		    else
 		    	print("Error while adding new character")
 		end
@@ -110,5 +111,17 @@ function UpdateLastCharacter(player_id, char_id)
 					end
 				end)
 			end
+	end)
+end
+
+function AddCharHouse(char_id)
+	MySQL.Async.insert('INSERT INTO character_house (char_id) VALUES (@char_id)',
+	  	{ ['@char_id'] = char_id },
+	  	function(insertId)
+		    if insertId ~= 0 then
+		    	-- print(insertId)
+		    else
+		    	-- print("Error while adding new character outfit")
+		end
 	end)
 end
