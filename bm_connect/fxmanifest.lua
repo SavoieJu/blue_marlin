@@ -9,7 +9,9 @@ version '1.0.0'
 loadscreen_manual_shutdown 'yes'
 
 client_scripts {
+    'client/pedModels.lua',
     'client/bm_c_onConnect.lua',
+    
 }
 
 ui_page('client/html/index.html')

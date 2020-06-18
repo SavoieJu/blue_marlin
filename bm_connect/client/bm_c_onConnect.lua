@@ -15,7 +15,36 @@ end)
 
 RegisterNUICallback('bm:start', function(data, cb)
 
-	SwitchInPlayer(PlayerPedId())
+	local modelName = exports.bm_connect:ModelListA()[tonumber(data.outfit_num)]
+	print(data[1])
+	print(data.outfit_num)
+	print(modelName)
+
+	local model = GetHashKey(modelName)
+    if IsModelInCdimage(model) and IsModelValid(model) then
+        RequestModel(model)
+        while not HasModelLoaded(model) do
+            Citizen.Wait(0)
+        end
+        SetPlayerModel(PlayerId(), model)
+        if model ~= "mp_f_freemode_01" and model ~= "mp_m_freemode_01" then 
+            SetPedRandomComponentVariation(PlayerPedId(), true)
+        else
+            SetPedComponentVariation(PlayerPedId(), 11, 0, 240, 0)
+            SetPedComponentVariation(PlayerPedId(), 8, 0, 240, 0)
+            SetPedComponentVariation(PlayerPedId(), 11, 6, 1, 0)
+        end
+        SetModelAsNoLongerNeeded(model)
+    end
+	
+	TriggerEvent('bm:loadToPlayer')
+
+    cb('ok')
+end)
+
+RegisterNetEvent('bm:loadToPlayer')
+AddEventHandler('bm:loadToPlayer', function()
+    SwitchInPlayer(PlayerPedId())
 	SetNuiFocus(false, false)
 
 	Citizen.CreateThread(function()
@@ -24,12 +53,6 @@ RegisterNUICallback('bm:start', function(data, cb)
 		end
 		DisplayRadar(true)
 	end)
-
-	TriggerEvent('chat:addMessage', {
-		args = { data.char_id }
-	})
-
-    cb('ok')
 end)
 
 RegisterNUICallback('bm:startCC', function(data, cb)

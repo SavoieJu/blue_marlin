@@ -12,11 +12,15 @@ function toggle_CS_UI() {
 	$("body").toggleClass("hidden");
 }
 
-function close_CS_UI(char_id) {
+function close_CS_UI(char_id, outfitNum) {
 	let id = char_id
+	let outfit = outfitNum
+	console.log(outfit);
+	
 	toggle_CS_UI();
 	$.post('http://bm_connect/bm:start', JSON.stringify({
 			char_id: id,
+			outfit_num: outfit,
 		})
 	);
 }
@@ -32,7 +36,7 @@ function createChar() {
 function populate_CS_UI(char) {
 	let cs_selection = document.querySelector(".cs_selection");
 	if (char != undefined) {
-		var date = new Date(char.birth_date);
+		let date = new Date(char.birth_date);
 
 		cs_selection.innerHTML += `
 			<div class="cs_box used">
@@ -41,7 +45,7 @@ function populate_CS_UI(char) {
 			    <h4 class="cs_bank">bank: <span>${char.char_bank}.00$</span></h4>
 			    <h4 class="cs_cash">pocket: <span>${char.char_pocket}.00$</span></h4>
 			    <h4 class="cs_birth">Date of birth: <span>${formatDate(date)}</span></h4>
-			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id})">Play</button>
+			    <button class="cs_play cs_button" onclick="close_CS_UI(${char.char_id}, ${char.outfit})">Play</button>
 			</div>
 		`;
 	} else {
