@@ -119,9 +119,9 @@ function AddCharHouse(char_id)
 	  	{ ['@char_id'] = char_id },
 	  	function(insertId)
 		    if insertId ~= 0 then
-		    	-- print(insertId)
+		    	print("Added character house")
 		    else
-		    	-- print("Error while adding new character outfit")
+		    	print("Error while adding new character house")
 		end
 	end)
 end
