@@ -16,8 +16,10 @@ function close_CS_UI(char_id, outfitNum) {
 	let id = char_id
 	let outfit = outfitNum
 	console.log(outfit);
-	
+
 	toggle_CS_UI();
+	depopulate_CS_UI();
+
 	$.post('http://bm_connect/bm:start', JSON.stringify({
 			char_id: id,
 			outfit_num: outfit,
@@ -31,6 +33,12 @@ function createChar() {
 			data: "create",
 		})
 	);
+}
+
+function depopulate_CS_UI() {
+	let cs_selection = document.querySelector(".cs_selection");
+
+	cs_selection.innerHTML = ""
 }
 
 function populate_CS_UI(char) {
