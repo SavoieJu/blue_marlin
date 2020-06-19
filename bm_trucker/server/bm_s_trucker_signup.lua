@@ -1,3 +1,11 @@
+RegisterServerEvent("baseevents:enteredVehicle", currentVehicle, currentSeat, car_name, netId)
+AddEventHandler("baseevents:enteredVehicle", function(currentVehicle, currentSeat, car_name, NetId)
+    source = NetworkGetEntityOwner(NetworkGetEntityFromNetworkId(NetId))
+
+    TriggerClientEvent('bm:checkIfEnteredTruckNearLoc', source, currentVehicle, car_name)
+    
+end)
+
 RegisterServerEvent("bm:setCharJobToTruckDriver", source)
 AddEventHandler("bm:setCharJobToTruckDriver", function(source)
     local license = GetPlayerLicense(source)
