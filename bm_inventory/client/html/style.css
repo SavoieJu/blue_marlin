@@ -1,0 +1,205 @@
+.hidden {
+    display: none;
+}
+
+.disable-dbl-tap-zoom {
+    touch-action: manipulation;
+}
+
+.hide-additional-inv > div.inv_slot{
+    display: none;
+}
+
+@font-face {
+    font-family: pricedown;
+    src: url(fonts/pricedown.ttf);
+}
+
+@font-face {
+    font-family: poppins-bold;
+    src: url(fonts/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: poppins-medium;
+    src: url(fonts/Poppins-Medium.ttf);
+}
+
+body {
+    position: fixed;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100%;
+    margin: 0;
+    /* top: 0;
+    right: 0;
+    bottom: 0; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.inventories {
+    align-self: center;
+    width: 70vw;
+    height: 70vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: rgba(0, 0, 0, 0.4); */
+    padding: 40px;
+}
+
+.player-inventory {
+    width: 45%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid #328EE9;
+    padding: 20px;
+    justify-content: center;
+}
+
+.controls_inventory {
+    width: 10%;
+    height: 100%;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    padding: 20px;
+}
+
+.controls_inventory > .exit {
+    background-color: white;
+    border: 2px solid #328EE9;
+    color: #328EE9;
+    font-family: pricedown;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+}
+
+.additional_inventory {
+    width: 45%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid #328EE9;
+    padding: 20px;
+    justify-content: center;
+}
+
+.inv_slot {
+    align-self: center;
+    width: 96px;
+    height: 112px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #328EE9;
+}
+
+.add_inv_slot {
+    align-self: center;
+    width: 96px;
+    height: 112px;
+    margin: 5px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #328EE9;
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2px;
+    align-self: center;
+}
+
+.inv_slot > .item > img {
+    width: 64px;
+    height: 64px;
+}
+
+.add_inv_slot > .item > img {
+    width: 64px;
+    height: 64px;
+}
+
+.inv_slot > .item > img, h3 {
+    align-self: center;
+    text-align: center;
+    color: #328EE9;
+    font-size: 0.8em;
+    font-family: poppins-medium;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.add_inv_slot > .item > img, h3 {
+    align-self: center;
+    text-align: center;
+    color: #328EE9;
+    font-size: 0.8em;
+    font-family: poppins-medium;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+#menu {
+    display: block;
+    background-color: white;
+    padding: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 30px lightgrey;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: top left;
+    transition: transform 0.1s, opacity 0.1s;
+}
+
+#menu.show {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+.menu-item {
+    display: block;
+    padding: 10px 30px;
+    transition: 0.1s;
+    color: #328EE9;
+    font-family: poppins-bold;
+}
+
+.menu-item:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+#out-click {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: none;
+}

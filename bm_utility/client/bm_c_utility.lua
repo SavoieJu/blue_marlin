@@ -68,6 +68,4 @@ function Draw3DText(x,y,z,textInput,fontId,scaleX,scaleY)
 	ClearDrawOrigin()
 end
 
-
-
 exports('Draw3DText', Draw3DText)

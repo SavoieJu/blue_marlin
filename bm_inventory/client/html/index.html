@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Character Creation</title>
+</head>
+<body class="hidden disable-dbl-tap-zoom">
+    <main class="inventories disable-dbl-tap-zoom">
+        <div class="player-inventory disable-dbl-tap-zoom">
+            <div class="inv_slot">
+                <!-- <div class="item clickable">
+                    <img src="images/item-null.png" alt="img">
+                    <h3 data-item-id="0" data-item-name="test item" data-item-quantity="1">test item</h3>
+                </div> -->
+            </div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+            <div class="inv_slot"></div>
+        </div>
+        <div class="controls_inventory disable-dbl-tap-zoom">
+            <div class="exit disable-dbl-tap-zoom" onclick="close_Inv_UI()">Exit</div>
+        </div>
+        <div class="additional_inventory disable-dbl-tap-zoom hide-additional-inv">
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+            <div class="add_inv_slot"></div>
+        </div>
+        <!-- <button class="button" onclick="close_Inv_UI()">Next</button> -->
+    </main>
+    <ul id="menu">
+        <li class="menu-item">Use</li>
+        <li class="menu-item">Transfer 1</li>
+        <li class="menu-item">Transfer 10</li>
+        <li class="menu-item">Transfer all</li>
+        <li class="menu-item">Drop 1</li>
+        <li class="menu-item">Drop all</li>
+      </ul>
+    <div id="out-click"></div>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="inventory.js"></script>
+</body>
+</html>
